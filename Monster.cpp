@@ -7,7 +7,7 @@
 #include "Arduino.h"
 #include "Monster.h"
 
-Monster::Monster(byte health, byte att, byte def, byte imgSize)
+Monster::Monster(byte health, byte att, byte def, byte imgSize, const uint8_t * sprite)
 {
   hp = health;
   attMod = att;
@@ -15,6 +15,7 @@ Monster::Monster(byte health, byte att, byte def, byte imgSize)
   spriteSize = imgSize;
   posnX = 8;
   posnY = 8;
+  const uint8_t * pointerToMySprite = sprite;
 };
 
  void Monster::takeHit(byte toHit,byte damage)

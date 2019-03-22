@@ -15,7 +15,7 @@ Monster::Monster(byte health, byte att, byte def, byte imgSize, const uint8_t * 
   spriteSize = imgSize;
   posnX = 8;
   posnY = 8;
-  const uint8_t * pointerToMySprite = sprite;
+  pointerToMySprite = sprite;
 };
 
  void Monster::takeHit(byte toHit,byte damage)

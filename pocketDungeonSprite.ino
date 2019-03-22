@@ -53,9 +53,6 @@ void loop() {
     arduboy.drawBitmap(chestPosnX,chestPosnY,treasureChest,8,8,WHITE);
     arduboy.drawBitmap(96,32,jeff.pointerToMySprite,8,8,WHITE);
     arduboy.setCursor(0,56);
-    arduboy.print(chestPosnX);
-    arduboy.print(" ");
-    arduboy.print(chestPosnY);
     arduboy.print("A to switch Jellies");
     //arduboy.print("j1 hp=");
     //arduboy.print(jelly1.hp);

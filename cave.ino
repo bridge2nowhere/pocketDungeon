@@ -10,6 +10,13 @@ byte caveRightX[30];
 byte caveRightY[30];
 byte caveRightCount = 0;
 
+
+
+void findChest(){
+  chestPosnX = (random(1,13) * 8) + 8;
+  chestPosnY = (random(1,7) * 8) + 8;
+}
+
 void makeCaveTop(){
   byte oldPosnX = 4;
   byte oldPosnY = 4;

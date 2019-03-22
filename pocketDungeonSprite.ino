@@ -7,6 +7,7 @@ Arduboy2 arduboy;
 //Images
 const uint8_t jellySprite[] PROGMEM = {0x83, 0xee, 0xf8, 0xf8, 0xfc, 0xf4, 0xf6, 0xc0}; 
 const uint8_t jeffSprite[]  PROGMEM = {0x00, 0x1f, 0x88, 0xeb, 0x3f, 0xe0, 0x80, 0x00};
+const uint8_t treasureChest[] PROGMEM = {0xfc, 0x92, 0x93, 0x99, 0x99, 0x93, 0x92, 0xfc};
 
 //Allow for switching between screen modes:
 //0 is splashScreen
@@ -22,15 +23,19 @@ Monster jeff(30,1,10,96,32,8,jeffSprite);
 //pointer to active monster
 Monster * activeMonster = &jelly1;
 
+byte chestPosnX;
+byte chestPosnY; 
+
 
 void setup() {
   arduboy.begin();
   arduboy.setFrameRate(30);
-  arduboy.clear();
+  arduboy.initRandomSeed();
   //calls cave functions to create random cave walls
   makeCaveTop();
   makeCaveLeft();
   makeCaveRight();
+  findChest();
 }
 
 void loop() {
@@ -45,9 +50,13 @@ void loop() {
     checkButtons();
     arduboy.drawBitmap(jelly1.posnX,jelly1.posnY,jelly1.pointerToMySprite,8,8, WHITE);
     arduboy.drawBitmap(jelly2.posnX,jelly2.posnY,jelly2.pointerToMySprite,8,8, WHITE);
+    arduboy.drawBitmap(chestPosnX,chestPosnY,treasureChest,8,8,WHITE);
     arduboy.drawBitmap(96,32,jeff.pointerToMySprite,8,8,WHITE);
     arduboy.setCursor(0,56);
-    arduboy.print("A to switch between Jellies");
+    arduboy.print(chestPosnX);
+    arduboy.print(" ");
+    arduboy.print(chestPosnY);
+    arduboy.print("A to switch Jellies");
     //arduboy.print("j1 hp=");
     //arduboy.print(jelly1.hp);
     //arduboy.print("  j2 hp=");
@@ -63,13 +72,13 @@ void splashScreen()
   bool moveOn = false;
   arduboy.setCursor(0,0);
   arduboy.setTextSize(2);
-  arduboy.println("Pocket");
-  arduboy.println("Dungeon");
+  arduboy.println(F("Pocket"));
+  arduboy.println(F("Dungeon"));
   arduboy.setTextSize(1);
-  arduboy.println("by Andrew Woodbridge");
+  arduboy.println(F("by Andrew Woodbridge"));
   arduboy.println();
   arduboy.println();
-  arduboy.println("Press A to Continue");
+  arduboy.println(F("Press A to Continue"));
   arduboy.display();
   while (!moveOn) {
    arduboy.pollButtons();

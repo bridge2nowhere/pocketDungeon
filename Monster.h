@@ -10,7 +10,7 @@
 
 class Monster {
   public:
-    Monster(byte health, byte attMod, byte def, byte imgSize, const uint8_t * sprite);
+    Monster(byte health, byte attMod, byte def,  byte startX, byte startY, byte imgSize, const uint8_t * sprite);
     byte hp;
     byte attMod;
     byte ac;
